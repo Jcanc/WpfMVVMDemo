@@ -1,0 +1,45 @@
+﻿<Window x:Class="WpfMVVMDemo.Views.ViewStudent"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfMVVMDemo.Views"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="ViewStudent" Height="300" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="{Binding Title}" FontSize="14" HorizontalAlignment="Left" Margin="10 0 0 0"></TextBlock>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Vertical"  HorizontalAlignment="Right">
+                <TextBlock Text="姓名：" Height="25" Margin="0 0 0 0"></TextBlock>
+                <TextBlock Text="性别：" Height="25" Margin="0 20 0 0"></TextBlock>
+                <TextBlock Text="爱好：" Height="25" Margin="0 20 0 0"></TextBlock>
+                <TextBlock Text="出生日期：" Height="25" Margin="0 20 0 0"></TextBlock>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+                <TextBox Text="{Binding Model.Name}" Width="150" Height="25" Margin="0 0 0 0"></TextBox>
+                <ComboBox x:Name="cbSex" Text="{Binding Model.Sex}" Width="150" Height="25" Margin="0 20 0 0"></ComboBox>
+                <TextBox Text="{Binding Model.Hobby}" Width="150" Height="25" Margin="0 20 0 0"></TextBox>
+                <DatePicker Text="{Binding Model.BirthDate}" Width="150" Height="25" Margin="0 20 0 0"></DatePicker>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btnSave" Click="btnSave_Click" Content="确定" Width="60" Height="25" Margin="0 0 10 0"></Button>
+            <Button x:Name="btnCancel" Click="btnCancel_Click" Content="取消" Width="60" Height="25" Margin="0 0 10 0"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,54 @@
+﻿<Window x:Class="WpfMVVMDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfMVVMDemo"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="搜索:" VerticalAlignment="Center" FontSize="16" Margin="10 0 0 0"></TextBlock>
+            <TextBox Text="{Binding Search}" Width="180" Height="25" Margin="10 0 0 0"></TextBox>
+            <Button Command="{Binding QueryCommand}" Content="查询" Width="75" Height="25" Margin="10 0 0 0"></Button>
+            <Button Command="{Binding AddCommand}" Content="新增" Width="75" Height="25" Margin="10 0 0 0"></Button>
+            <Button Command="{Binding ResetCommand}" Content="重置" Width="75" Height="25" Margin="10 0 0 0"></Button>
+        </StackPanel>
+
+        <DataGrid Grid.Row="1" IsReadOnly="True" ItemsSource="{Binding GridModelList}" AutoGenerateColumns="False" ColumnWidth="*">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="姓名" Binding="{Binding Name}">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="性别" Binding="{Binding Sex}">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="爱好" Binding="{Binding Hobby}">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="出生日期" Binding="{Binding BirthDate, StringFormat='yyyy/MM/dd'}">
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Header="操作">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="修改" Width="60" Height="25" Foreground="Black" Background="Yellow"
+                                        CommandParameter="{Binding Id}"
+                                        Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></Button>
+                                <Button Content="删除" Width="60" Height="25" Foreground="Black" Background="Red"
+                                        CommandParameter="{Binding Id}"
+                                        Command="{Binding DataContext.DelCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}">
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
